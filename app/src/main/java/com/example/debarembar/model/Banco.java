@@ -1,4 +1,16 @@
 package com.example.debarembar.model;
 
-public class Banco {
+import androidx.room.Database;
+import androidx.room.RoomDatabase;
+
+import com.example.debarembar.controller.BarDao;
+import com.example.debarembar.controller.ProductDao;
+
+@Database(entities = {Bar.class, Product.class}, version = 1)
+
+public abstract class Banco extends RoomDatabase {
+    public abstract BarDao barDao();
+    public abstract ProductDao productDao();
+
 }
+    
