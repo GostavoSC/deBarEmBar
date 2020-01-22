@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "529409809592",
+    "firebase_url": "https://debarembar-2f533.firebaseio.com",
+    "project_id": "debarembar-2f533",
+    "storage_bucket": "debarembar-2f533.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:529409809592:android:0bdbe829aa42aec9a7e84d",
+        "android_client_info": {
+          "package_name": "com.example.debarembar"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "529409809592-f5v1rqctfuq3mng4fovr3h14hsfc41bp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.debarembar",
+            "certificate_hash": "1e1c839066342d9f15bb1ecf6d9e6103dc3b5a7f"
+          }
+        },
+        {
+          "client_id": "529409809592-r18ll6d05j15ahn6c9ugfp1e9s4tkqo7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBs1LYNDAl_RANn1gUAkDws33imFxPi8-U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "529409809592-r18ll6d05j15ahn6c9ugfp1e9s4tkqo7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

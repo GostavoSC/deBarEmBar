@@ -15,7 +15,9 @@
         <activity
             android:name=".controller.MainActivity"
             android:label="@string/title_activity_user_profile"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"/>
+
+        <activity android:name=".controller.Login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
