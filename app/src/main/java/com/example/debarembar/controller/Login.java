@@ -1,5 +1,7 @@
 package com.example.debarembar.controller;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -9,6 +11,7 @@ import android.widget.EditText;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.debarembar.MainActivity;
 import com.example.debarembar.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -27,79 +30,100 @@ public class Login extends AppCompatActivity {
 
 
     private static final String TAG = "1";
-    Button btnEnviar;
+    Button btnEnviar, btnVerificar;
     EditText txtPhone;
     String v1erificationId;
-    FirebaseAuth mAuth ;
-    PhoneAuthProvider.ForceResendingToken code;
+    FirebaseAuth mAuth;
+
     PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacks = null;
     PhoneAuthCredential credential;
     String phoneNumber = "";
+    String code;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        SharedPreferences preferences = getSharedPreferences("user_preferences", MODE_PRIVATE);
+        if (!phoneNumber.equalsIgnoreCase(preferences.getString("telefoneUser",""))){
+            Intent intent = new Intent(Login.this, MainActivity.class);
+            intent.putExtra("numeroUser",preferences.getString("telefoneUser","") );
+            startActivity(intent);
+            finish();
+        }else {
 
-        txtPhone = findViewById(R.id.editText);
-        mAuth = FirebaseAuth.getInstance();
-        btnEnviar = findViewById(R.id.btnEnviar);
-        btnEnviar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                phoneNumber = String.valueOf(txtPhone.getText());
-                verificaEstado();
+            txtPhone = findViewById(R.id.editText);
+            txtPhone.setText("+55");
+            btnVerificar = findViewById(R.id.btnVerificar);
+            mAuth = FirebaseAuth.getInstance();
+            btnVerificar.setEnabled(false);
+            btnEnviar = findViewById(R.id.btnEnviar);
+            btnEnviar.setText("Enviar");
+
+            btnEnviar.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    phoneNumber = String.valueOf(txtPhone.getText());
+
+                    verificaEstado();
 
 
-
-
-            }
-        });
-
-
-
-        mCallbacks = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
-            @Override
-            public void onVerificationCompleted(PhoneAuthCredential phoneAuthCredential) {
-                credential = phoneAuthCredential;
-                Log.d(TAG, "onVerificationCompleted:" + credential);
-                signInWithPhoneAuthCredential(credential);
-            }
-
-            @Override
-            public void onVerificationFailed(FirebaseException e) {
-                Log.w(TAG, "onVerificationFailed", e);
-
-                if (e instanceof FirebaseAuthInvalidCredentialsException) {
-                    // Invalid request
-                    // ...
-                } else if (e instanceof FirebaseTooManyRequestsException) {
-                    // The SMS quota for the project has been exceeded
-                    // ...
                 }
-            }
-
-            @Override
-            public void onCodeSent(@NonNull String verificationId,
-                                   @NonNull PhoneAuthProvider.ForceResendingToken token) {
-                // The SMS verification code has been sent to the provided phone number, we
-                // now need to ask the user to enter the code and then construct a credential
-                // by combining the code with a verification ID.
-                Log.d(TAG, "onCodeSent:" + verificationId);
-
-                // Save verification ID and resending token so we can use them later
-
-                v1erificationId = verificationId;
-                code = token;
+            });
 
 
-                // ...
-            }
-        };
+            mCallbacks = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
+                @Override
+                public void onVerificationCompleted(PhoneAuthCredential phoneAuthCredential) {
+                    credential = phoneAuthCredential;
+                    Log.e(TAG, "onVerificationCompleted:" + credential);
 
+                    signInWithPhoneAuthCredential(credential);
+
+
+                }
+
+                @Override
+                public void onVerificationFailed(FirebaseException e) {
+                    Log.w(TAG, "onVerificationFailed", e);
+
+                    if (e instanceof FirebaseAuthInvalidCredentialsException) {
+                        // Invalid request
+                        // ...
+                    } else if (e instanceof FirebaseTooManyRequestsException) {
+                        // The SMS quota for the project has been exceeded
+                        // ...
+                    }
+                }
+
+                @Override
+                public void onCodeSent(@NonNull final String verificationId,
+                                       @NonNull PhoneAuthProvider.ForceResendingToken token) {
+                    // The SMS verification code has been sent to the provided phone number, we
+                    // now need to ask the user to enter the code and then construct a credential
+                    // by combining the code with a verification ID.
+                    Log.d(TAG, "onCodeSent:" + verificationId);
+                    txtPhone.setText("");
+                    txtPhone.setHint("Codigo");
+                    // Save verification ID and resending token so we can use them later
+                    btnVerificar.setEnabled(true);
+                    btnEnviar.setEnabled(false);
+                    v1erificationId = verificationId;
+                    // mostrar interface para o usuario digitar o codigo
+                    btnVerificar.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            code = String.valueOf(txtPhone.getText());
+                            Log.e("code", code);
+
+                            onVerificationCompleted(PhoneAuthProvider.getCredential(verificationId, String.valueOf(code)));
+                        }
+                    });
+
+                }
+            };
+        }
     }
-
-
 
 
     private void signInWithPhoneAuthCredential(PhoneAuthCredential credential) {
@@ -110,9 +134,19 @@ public class Login extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
-                            Log.d(TAG, "signInWithCredential:success");
+                            Log.e(TAG, "signInWithCredential:success");
 
                             FirebaseUser user = task.getResult().getUser();
+                            Intent intent = new Intent(Login.this, MainActivity.class);
+                            intent.putExtra("numeroUser", user.getPhoneNumber());
+                            SharedPreferences preferences = getSharedPreferences("user_preferences", MODE_PRIVATE);
+                            SharedPreferences.Editor editor = preferences.edit();
+                            editor.putString("telefoneUser", user.getPhoneNumber());
+                            editor.apply();
+
+                            startActivity(intent);
+                            finish();
+
 
                             // ...
                         } else {
@@ -135,8 +169,8 @@ public class Login extends AppCompatActivity {
                 this,               // Activity (for callback binding)
                 mCallbacks);
     }
-
-
 }
+
+
 
 
