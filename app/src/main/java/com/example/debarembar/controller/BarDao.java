@@ -25,6 +25,9 @@ import java.util.List;
 
         @Delete
         void delete(Bar bar);
+
+        @Delete
+        void deleteAll(ArrayList<Bar> bar);
     }
 
 

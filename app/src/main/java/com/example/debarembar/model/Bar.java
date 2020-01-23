@@ -4,7 +4,7 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-import com.example.debarembar.controller.BarDao;
+import java.util.Objects;
 
 @Entity
 public class Bar {
@@ -53,5 +53,21 @@ public class Bar {
     }
     public void setProduct(int product) {
         this.product = product;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Bar bar = (Bar) o;
+        return ID == bar.ID &&
+                product == bar.product &&
+                Objects.equals(name, bar.name) &&
+                Objects.equals(adress, bar.adress);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(ID, name, adress, product);
     }
 }
