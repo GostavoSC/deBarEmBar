@@ -7,16 +7,6 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".model.UserProfile">
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/fotoPerfil"
-        android:layout_width="179dp"
-        android:layout_height="182dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginLeft="4dp"
-        android:layout_marginTop="36dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@tools:sample/avatars[11]" />
 
     <TextView
         android:id="@+id/txtNomeUser"
@@ -102,19 +92,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageButton
-        android:id="@+id/imagebtnMudarFoto"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="184dp"
-        android:layout_marginLeft="184dp"
-        android:layout_marginTop="169dp"
-        android:src="@android:drawable/ic_menu_camera"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <Button
-        android:id="@+id/btnSave"
+        android:id="@+id/btnOkMain"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="120dp"
@@ -123,7 +102,7 @@
         android:layout_marginEnd="120dp"
         android:layout_marginRight="120dp"
         android:layout_marginBottom="123dp"
-        android:text="SALVAR ALTERAÇÕES "
+        android:text="@android:string/ok"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

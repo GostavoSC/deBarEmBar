@@ -50,65 +50,26 @@ public class UserProfile extends AppCompatActivity {
     //TextView editCPF = findViewById(R.id.editCPF);
     //TextView txtNomeUser = findViewById(R.id.txtNomeUser);
 
-    ImageView imagebtnMudarFoto;
-    ImageView fotoPerfil;
-    Button btnSave;
+    Button btnOkMain;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_profile);
-
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setTitle("Perfil de Usuário");
-        fotoPerfil = findViewById(R.id.fotoPerfil);
-
-        SharedPreferences shared = getSharedPreferences("preferences", MODE_PRIVATE);
 
         editDados();
 
+        btnOkMain = findViewById(R.id.btnOkMain);
 
-
-        btnSave = findViewById(R.id.btnSave);
-
-        imagebtnMudarFoto = findViewById(R.id.imagebtnMudarFoto);
-        imagebtnMudarFoto.setOnClickListener(new View.OnClickListener() {
+        btnOkMain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                startActivityForResult(intent, 0);
-
-            }
-        });
-        btnSave.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                String img = String.valueOf(fotoPerfil);
-                Log.e("img", img);
-
-                SharedPAPI(img);
-                //selectPhoto();
-
-                SharedPreferences foto = getSharedPreferences("Foto", MODE_PRIVATE);
-                SharedPreferences.Editor edit = foto.edit();
-                edit.putString("Last", String.valueOf(fotoPerfil));
-                edit.apply();
-
-                String armz = String.valueOf(fotoPerfil);
-
-
-                Intent intent = new Intent(v.getContext(), MainActivity.class);
+                Intent intent = new Intent(UserProfile.this, MainActivity.class);
                 startActivity(intent);
-
-                Context context = getApplicationContext();
-                CharSequence text = "Alterações salvas";
-                int duration = Toast.LENGTH_LONG;
-                Toast toast = Toast.makeText(context, text, duration);
-                toast.show();
-
             }
         });
     }
@@ -119,12 +80,13 @@ public class UserProfile extends AppCompatActivity {
          * (onde cada variável recebe o valor do parâmetro);
          */
         /*
-        auxDados(user.getEndereco(), editEndereco);
-        auxDados(user.getTelefone(), editTelefone);
-        auxDados(user.getCPF(), editCPF);
-        auxDados(user.gettxtNomeUser(), txtNomeUser);
-         */
+        auxDados(usuario.getEndereco(), editEndereco);
+        auxDados(usuario.getTelefone(), editTelefone);
+        auxDados(usuario.getCPF(), editCPF);
+        auxDados(usuario.gettxtNomeUser(), txtNomeUser);
         Log.e("Metodo", "editDados");
+
+         */
     }
 
     public void auxDados(String string, TextView textview) {
@@ -134,41 +96,6 @@ public class UserProfile extends AppCompatActivity {
          */
         textview.setText(string);
         Log.e("Metodo", "auxDados " + string );
-    }
-
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        Bitmap bitmap = (Bitmap) data.getExtras().get("data");
-        imagebtnMudarFoto = findViewById(R.id.imagebtnMudarFoto);
-        fotoPerfil = findViewById(R.id.fotoPerfil);
-        fotoPerfil.setImageBitmap(bitmap);
-        Log.e("fotoPerfil", String.valueOf(fotoPerfil));
-
-        SharedPreferences sharedPreferences;
-        sharedPreferences = getSharedPreferences("Foto", MODE_PRIVATE);
-        SharedPreferences.Editor edit = sharedPreferences.edit();
-        edit.putString("Last", String.valueOf(fotoPerfil));
-        edit.apply();
-    }
-
-
-    public void SharedPAPI(String img){
-        SharedPreferences sharedPreferences = getSharedPreferences("Foto", MODE_PRIVATE);
-        SharedPreferences.Editor edit = sharedPreferences.edit();
-        edit.putString("Last", img);
-        edit.apply();
-    }
-
-
-
-    public void selectPhoto(){
-        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-        intent.setType("image/*");
-
-        startActivityForResult(Intent.createChooser(intent, "selecionarimagem"),1);
-
     }
 
 }
