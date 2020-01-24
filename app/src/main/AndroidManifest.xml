@@ -15,6 +15,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.provider"
@@ -31,7 +32,9 @@
             android:label="@string/title_activity_user_profile"
             android:theme="@style/AppTheme.NoActionBar"/>
 
-        <activity android:name=".controller.MainActivity">
+
+
+        <activity android:name=".controller.CadastroBarActivity">
             <intent-filter>
             <action android:name="android.intent.action.MAIN" />
 
@@ -41,8 +44,10 @@
         <activity
             android:name=".model.UserProfile"
             android:label="@string/title_activity_user_profile"
-            android:parentActivityName=".controller.MainActivity"
+            android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name=".MainActivity"/>
+
     </application>
 
 </manifest>
