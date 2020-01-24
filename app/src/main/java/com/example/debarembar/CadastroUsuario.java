@@ -10,6 +10,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.example.debarembar.model.User;
+import com.example.debarembar.model.UserProfile;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -66,7 +69,8 @@ public class CadastroUsuario extends AppCompatActivity {
         telefoneShared.getString("user_preferences", "");
 
         //JSONObject armazenando as informações de usuários
-        //(nome, telefone e endereço);
+        //(nome e endereço);
+        //Telefone será direcionado pelo Firebase;
         JSONObject jsonObject = new JSONObject();
         try {
             //same key?
@@ -83,14 +87,14 @@ public class CadastroUsuario extends AppCompatActivity {
         edit.putString("StringJSONObject", StringJSONObject);
         Log.i("StringJSON", StringJSONObject);
 
-        Button btnOk = findViewById(R.id.btnOk);
-        btnOk.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent (v.getContext(), MainActivity.class);
-                startActivity(intent);
-            }
-        });
+            Button btnOk = findViewById(R.id.btnOk);
+            btnOk.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent (v.getContext(), MainActivity.class);
+                    startActivity(intent);
+                }
+            });
 
     }
 

@@ -1,10 +1,21 @@
 package com.example.debarembar.model;
 
+import androidx.room.ColumnInfo;
+import androidx.room.PrimaryKey;
+
 public class User {
 
+    @PrimaryKey
+    public int ID;
+
+    @ColumnInfo
     String nome;
+
+    @ColumnInfo
     String telefone;
 
+    @ColumnInfo
+    String endereco;
 
     public User(String nome, String telefone, String endereco) {
         this.nome = nome;
@@ -12,7 +23,6 @@ public class User {
         this.endereco = endereco;
     }
 
-    String endereco;
 
     public String getNome() {
         return nome;
