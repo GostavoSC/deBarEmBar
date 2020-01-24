@@ -3,10 +3,9 @@
     xmlns:dist="http://schemas.android.com/apk/distribution"
     package="com.example.debarembar">
 
-    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <dist:module dist:instant="true" />
-
 
     <application
         android:allowBackup="true"
@@ -15,6 +14,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".CadastroUsuario"
+            android:parentActivityName=".MainActivity">
+
+        </activity>
 
         <provider
             android:name="androidx.core.content.FileProvider"
@@ -23,30 +26,30 @@
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/providers_path"/>
+                android:resource="@xml/providers_path" />
         </provider>
-
 
         <activity
             android:name=".controller.Login"
             android:label="@string/title_activity_user_profile"
-            android:theme="@style/AppTheme.NoActionBar"/>
-
-
-
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".controller.CadastroBarActivity">
-            <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
         </activity>
+
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+
         <activity
             android:name=".model.UserProfile"
             android:label="@string/title_activity_user_profile"
             android:parentActivityName=".MainActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
-        <activity android:name=".MainActivity"/>
+            android:theme="@style/AppTheme.NoActionBar" />
 
     </application>
 
