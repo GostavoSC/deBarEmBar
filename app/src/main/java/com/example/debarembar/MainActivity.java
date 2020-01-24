@@ -1,4 +1,4 @@
-package com.example.debarembar.controller;
+package com.example.debarembar;
 
 import androidx.appcompat.app.AppCompatActivity;
 
