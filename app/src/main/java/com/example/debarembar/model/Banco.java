@@ -12,5 +12,9 @@ public abstract class Banco extends RoomDatabase {
     public abstract BarDao barDao();
     public abstract ProductDao productDao();
 
+    //public abstract ProductDao productDao();
+
+
+
 }
     

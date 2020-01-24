@@ -2,9 +2,12 @@ package com.example.debarembar;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 
 import org.json.JSONArray;
@@ -80,5 +83,16 @@ public class CadastroUsuario extends AppCompatActivity {
         edit.putString("StringJSONObject", StringJSONObject);
         Log.i("StringJSON", StringJSONObject);
 
+        Button btnOk = findViewById(R.id.btnOk);
+        btnOk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent (v.getContext(), MainActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
+
+
 }

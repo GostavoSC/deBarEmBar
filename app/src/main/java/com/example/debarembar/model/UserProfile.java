@@ -46,6 +46,9 @@ public class UserProfile extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+
+
     }
 
     public void editDados() {
