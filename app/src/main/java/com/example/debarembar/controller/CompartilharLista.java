@@ -2,73 +2,87 @@ package com.example.debarembar.controller;
 
 
 import android.Manifest;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
-import android.renderscript.ScriptGroup;
 import android.telephony.SmsManager;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.ContextCompat;
 
-import com.bumptech.glide.Glide;
 import com.example.debarembar.R;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 
 import java.util.ArrayList;
 
-import pl.droidsonroids.gif.GifAnimationMetaData;
-
 public class CompartilharLista extends AppCompatActivity {
-
-    private static final int MY_PERMISSIONS_REQUEST_READ_CONTACTS = 1 ;
+    private static final int MY_PERMISSIONS_REQUEST_READ_CONTACTS = 1;
+    private static final String CHANNEL_ID = "BarNotificationChannel";
+    NotificationCompat.Builder builder;
+    ArrayList<String> bares = new ArrayList<>();
     private Button btnEnviarSms;
-    private ImageView imgLoading;
-    ArrayList <String>bares =new ArrayList<>();
+    private int notificationId = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         permissao();
-        Intent in= getIntent();
-        final String numeroUser = in.getStringExtra("numeroUser");
 
-
+        Intent in = getIntent();
+        //final String numeroUser = in.getStringExtra("numeroUser");
         bares.add("Juka");
         bares.add("Gril do mato");
         bares.add("Chega são volta torto");
 
-
-
-
+        JSONArray jsonArray = new JSONArray(bares);
         btnEnviarSms = findViewById(R.id.enviarSms);
-
         btnEnviarSms.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String toString = "MELHORES BARES";
-                toString +="\n";
+                SmsManager smsManager = SmsManager.getDefault();
+                smsManager.sendTextMessage("+5547996650611", null, jsonArray.toString(), null, null);
 
-                for(int i = 0; i< bares.size();i++) {
-                    toString += bares.get(i) + "\n";
-                }
-                    SmsManager smsManager = SmsManager.getDefault();
-                    smsManager.sendTextMessage(numeroUser, null, toString, null, null);
-
-                }
-
-
+            }
         });
+    }
+
+
+    public void notification() {
+        NotificationChannel channel;
+        builder = new NotificationCompat.Builder(getApplicationContext(), CHANNEL_ID)
+                .setSmallIcon(R.drawable.icon)
+                .setContentTitle("UUUBAAA, OLHA A LISTA DE BAR CONSAGRADO")
+                .setStyle(new NotificationCompat.BigTextStyle()
+                        .bigText("Te enviaram uma nova lista meu amigo, da uma olhadinha"))
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = "De Bar em bar";
+            String description = "teste";
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            channel = new NotificationChannel(CHANNEL_ID, name, importance);
+            channel.setDescription(description);
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+            notificationManager.notify(notificationId, builder.build());
+        } else {
+            NotificationManagerCompat notificationManager = NotificationManagerCompat.from(getApplicationContext());
+            notificationManager.notify(notificationId, builder.build());
+        }
+
 
     }
-    public void permissao(){
+
+    public void permissao() {
         if (ContextCompat.checkSelfPermission(this,
                 Manifest.permission.SEND_SMS)
                 != PackageManager.PERMISSION_GRANTED) {
