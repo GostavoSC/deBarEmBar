@@ -78,8 +78,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
 
         mLocationRequest = new LocationRequest();
-        mLocationRequest.setInterval(120000); // two minute interval
-        mLocationRequest.setFastestInterval(120000);
+        mLocationRequest.setInterval(100000); // two minute interval
+        mLocationRequest.setFastestInterval(100000);
         mLocationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
 
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {

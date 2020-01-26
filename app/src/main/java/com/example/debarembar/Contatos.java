@@ -105,6 +105,7 @@ public class Contatos extends AppCompatActivity {
         if (resultCode == RESULT_OK) {
             switch (requestCode) {
                 case RESULT_PICK_CONTACT:
+
                     contactPicked(data);
                     break;
             }
@@ -119,13 +120,16 @@ public class Contatos extends AppCompatActivity {
         try {
             String phoneNo = null;
             Uri uri = data.getData ();
+
+            Uri agenda = ContactsContract.Contacts.CONTENT_URI;
+            //
+            // int phoneIndex = cursor.getColumnIndex (ContactsContract.CommonDataKinds.Phone.NUMBER);
+            //phoneNo = cursor.getString (phoneIndex);
+
             cursor = getContentResolver ().query (uri, null, null,null,null);
             cursor.moveToFirst ();
-            int phoneIndex = cursor.getColumnIndex (ContactsContract.CommonDataKinds.Phone.NUMBER);
-
-            phoneNo = cursor.getString (phoneIndex);
-
-            phone.setText (phoneNo);
+            cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
+            txtphoneNo.setText(cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME)));
 
 
         } catch (Exception e) {

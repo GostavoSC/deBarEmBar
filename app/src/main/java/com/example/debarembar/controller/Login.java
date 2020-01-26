@@ -52,7 +52,7 @@ public class Login extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         SharedPreferences preferences = getSharedPreferences("user_preferences", MODE_PRIVATE);
         if (!phoneNumber.equalsIgnoreCase(preferences.getString("telefoneUser",""))){
-            Intent intent = new Intent(Login.this, CompartilharLista.class);
+            Intent intent = new Intent(Login.this, Central.class);
             intent.putExtra("numeroUser",preferences.getString("telefoneUser","") );
             startActivity(intent);
             finish();
@@ -148,7 +148,7 @@ public class Login extends AppCompatActivity {
 
                             FirebaseUser user = task.getResult().getUser();
                             user.sendEmailVerification();
-                            Intent intent = new Intent(Login.this, MainActivity.class);
+                            Intent intent = new Intent(Login.this, Central.class);
                             intent.putExtra("numeroUser", user.getPhoneNumber());
                             SharedPreferences preferences = getSharedPreferences("user_preferences", MODE_PRIVATE);
                             SharedPreferences.Editor editor = preferences.edit();

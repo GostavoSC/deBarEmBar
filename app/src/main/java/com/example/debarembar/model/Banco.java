@@ -13,7 +13,7 @@ import com.example.debarembar.controller.ProductDao;
 
 import java.util.concurrent.Executors;
 
-@Database(entities = {Bar.class, Product.class}, version = 1)
+@Database(entities = {Bar.class, Product.class}, version = 1 ,exportSchema = false)
 public abstract class Banco extends RoomDatabase {
     public abstract BarDao barDao();
     public abstract ProductDao productDao();

@@ -45,7 +45,7 @@ public class CompartilharLista extends AppCompatActivity {
         bares.add("Chega são volta torto");
 
         JSONArray jsonArray = new JSONArray(bares);
-        btnEnviarSms = findViewById(R.id.enviarSms);
+       /* btnEnviarSms = findViewById(R.id.enviarSms);
         btnEnviarSms.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -53,7 +53,7 @@ public class CompartilharLista extends AppCompatActivity {
                 smsManager.sendTextMessage("+5547996650611", null, jsonArray.toString(), null, null);
 
             }
-        });
+        });*/
     }
 
 

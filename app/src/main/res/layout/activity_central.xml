@@ -17,26 +17,6 @@
         tools:layout_editor_absoluteX="16dp">
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/btnMinhaConta"
-                android:layout_width="77dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Minha Conta" />
-
-            <Button
-                android:id="@+id/btnMaps"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Mapa" />
-        </LinearLayout>
-
-        <LinearLayout
             android:id="@+id/linearOne"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -62,5 +42,32 @@
                 android:layout_weight="1"
                 android:text="Cadastrar Bar" />
         </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnMinhaConta"
+                android:layout_width="77dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Minha Conta" />
+
+            <Button
+                android:id="@+id/btnMaps"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Mapa" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnCompartilhar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Compartilhar Lista" />
+
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
