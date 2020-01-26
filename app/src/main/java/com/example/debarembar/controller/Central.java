@@ -31,7 +31,7 @@ public class Central extends AppCompatActivity {
         btnListas.findViewById(R.id.btnLista).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                
+
             }
         });
 
