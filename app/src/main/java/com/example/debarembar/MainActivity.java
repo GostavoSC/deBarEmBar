@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        Broadcast broadcast = new Broadcast();
+
 
         Banco db = Room.databaseBuilder(this,
                 Banco.class, "DB").build();
