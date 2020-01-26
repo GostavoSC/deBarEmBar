@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:layout_alignWithParentIfMissing="false"
     android:textAlignment="center"
-    tools:context=".Central">
+    tools:context=".controller.Central">
 
     <LinearLayout
         android:layout_width="match_parent"
