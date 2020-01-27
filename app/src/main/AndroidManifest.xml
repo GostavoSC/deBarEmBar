@@ -27,7 +27,6 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.SEND_SMS" />
->>>>>>> 520872b3c2478b0fed94fa06f97252dd99fed1cf
 
     <application
         android:allowBackup="true"
