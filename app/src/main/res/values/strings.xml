@@ -1,7 +1,11 @@
 <resources>
+
+    <string name="title_activity_user_profile">UserProfile</string>
+
     <string name="app_name">De bar em bar</string>
     <string name="title_activity_maps">Mapa</string>
     <string name="channel_name">Channel name</string>
     <string name="channel_description">Channel description</string>
     <string name="snooze">SNOOZE</string>
+
 </resources>
