@@ -57,8 +57,8 @@ public class CadastroUsuario extends AppCompatActivity {
          */
 
         //Passando uma String para o SharedPreferences
-        getNomeUser = sharedPreferences.getString("name", null);
-        getEnderecoUser = sharedPreferences.getString("adress", null);
+        //getNomeUser = sharedPreferences.getString("name", null);
+        //getEnderecoUser = sharedPreferences.getString("adress", null);
 
         /**
          * Criando um novo SharedPreferences para

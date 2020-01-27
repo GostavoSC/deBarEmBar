@@ -3,9 +3,7 @@ package com.example.debarembar.model;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.example.debarembar.CadastroUsuario;
 import com.example.debarembar.R;
-import com.example.debarembar.MainActivity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;

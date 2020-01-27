@@ -7,11 +7,12 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.debarembar.MainActivity;
+import com.bumptech.glide.Glide;
 import com.example.debarembar.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -34,19 +35,23 @@ public class Login extends AppCompatActivity {
     EditText txtPhone;
     String v1erificationId;
     FirebaseAuth mAuth;
+    ImageView imgLoading;
 
     PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacks = null;
     PhoneAuthCredential credential;
     String phoneNumber = "";
     String code;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        imgLoading= findViewById(R.id.imgLoading);
+
         setContentView(R.layout.activity_login);
         SharedPreferences preferences = getSharedPreferences("user_preferences", MODE_PRIVATE);
         if (!phoneNumber.equalsIgnoreCase(preferences.getString("telefoneUser",""))){
-            Intent intent = new Intent(Login.this, MainActivity.class);
+            Intent intent = new Intent(Login.this, Central.class);
             intent.putExtra("numeroUser",preferences.getString("telefoneUser","") );
             startActivity(intent);
             finish();
@@ -59,12 +64,15 @@ public class Login extends AppCompatActivity {
             btnVerificar.setEnabled(false);
             btnEnviar = findViewById(R.id.btnEnviar);
             btnEnviar.setText("Enviar");
-
+            imgLoading= findViewById(R.id.imgLoading);
             btnEnviar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     phoneNumber = String.valueOf(txtPhone.getText());
 
+                    Glide.with(Login.this)
+                            .load(R.drawable.loading)
+                            .into(imgLoading);
                     verificaEstado();
 
 
@@ -103,6 +111,7 @@ public class Login extends AppCompatActivity {
                     // now need to ask the user to enter the code and then construct a credential
                     // by combining the code with a verification ID.
                     Log.d(TAG, "onCodeSent:" + verificationId);
+                    imgLoading.setVisibility(View.INVISIBLE);
                     txtPhone.setText("");
                     txtPhone.setHint("Codigo");
                     // Save verification ID and resending token so we can use them later
@@ -115,7 +124,7 @@ public class Login extends AppCompatActivity {
                         public void onClick(View v) {
                             code = String.valueOf(txtPhone.getText());
                             Log.e("code", code);
-
+                            imgLoading.setVisibility(View.VISIBLE);
                             onVerificationCompleted(PhoneAuthProvider.getCredential(verificationId, String.valueOf(code)));
                         }
                     });
@@ -127,7 +136,7 @@ public class Login extends AppCompatActivity {
 
 
     private void signInWithPhoneAuthCredential(PhoneAuthCredential credential) {
-
+        imgLoading.setVisibility(View.INVISIBLE);
         mAuth.signInWithCredential(credential)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -137,7 +146,8 @@ public class Login extends AppCompatActivity {
                             Log.e(TAG, "signInWithCredential:success");
 
                             FirebaseUser user = task.getResult().getUser();
-                            Intent intent = new Intent(Login.this, MainActivity.class);
+                            user.sendEmailVerification();
+                            Intent intent = new Intent(Login.this, Central.class);
                             intent.putExtra("numeroUser", user.getPhoneNumber());
                             SharedPreferences preferences = getSharedPreferences("user_preferences", MODE_PRIVATE);
                             SharedPreferences.Editor editor = preferences.edit();
