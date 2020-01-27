@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.example.debarembar.controller.Central;
 import com.example.debarembar.model.User;
 import com.example.debarembar.model.UserProfile;
 
@@ -91,7 +92,7 @@ public class CadastroUsuario extends AppCompatActivity {
             btnOk.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent (v.getContext(), MainActivity.class);
+                    Intent intent = new Intent (v.getContext(), Central.class);
                     startActivity(intent);
                 }
             });

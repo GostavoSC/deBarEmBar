@@ -35,7 +35,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtCadastro" />
+        app:layout_constraintTop_toBottomOf="@+id/txtCadastro"
+        android:background="@drawable/rounded_edittext"/>
 
     <EditText
         android:id="@+id/editTextTelefone"
@@ -49,7 +50,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextNome" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextNome"
+        android:background="@drawable/rounded_edittext"/>
 
     <EditText
         android:id="@+id/editTextEndereco"
@@ -60,7 +62,8 @@
         android:ems="10"
         android:inputType="textPersonName"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTelefone" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextTelefone"
+        android:background="@drawable/rounded_edittext"/>
 
     <TextView
         android:id="@+id/txtNome"

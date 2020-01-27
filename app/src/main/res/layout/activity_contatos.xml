@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    tools:context=".MainActivity">
+    tools:context=".controller.Central">
 
     <Button
         android:id="@+id/select"
@@ -32,7 +32,8 @@
         android:phoneNumber="true"
         android:textColorHint="@color/abc_primary_text_material_dark"
         android:layout_below="@+id/imageButton"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/rounded_edittext"/>
 
     <EditText
         android:layout_width="wrap_content"
@@ -44,7 +45,8 @@
         android:textColorHint="@color/abc_primary_text_material_dark"
         android:layout_alignRight="@+id/imageButton"
         android:layout_alignEnd="@+id/imageButton"
-        android:hint="Enter SMS" />
+        android:hint="Enter SMS"
+        />
 
     <Button
         android:id="@+id/btnSendSMS"
