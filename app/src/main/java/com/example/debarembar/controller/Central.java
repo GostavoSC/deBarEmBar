@@ -1,6 +1,7 @@
 package com.example.debarembar.controller;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.room.Room;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,8 +11,10 @@ import android.widget.Button;
 import com.example.debarembar.Contatos;
 import com.example.debarembar.MapsActivity;
 import com.example.debarembar.R;
+import com.example.debarembar.model.Banco;
 
 public class Central extends AppCompatActivity {
+
 
     Button btnCadastroBar, btnMinhaConta, btnListas, btnMapa,btnCompartilharLista;
 
@@ -19,6 +22,8 @@ public class Central extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_central);
+
+        Banco db = Banco.buildDatabase(getApplicationContext());
 
         btnCompartilharLista=findViewById(R.id.btnCompartilhar);
         btnCompartilharLista.setOnClickListener(new View.OnClickListener() {

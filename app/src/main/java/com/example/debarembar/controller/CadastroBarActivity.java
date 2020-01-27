@@ -19,35 +19,53 @@ import com.example.debarembar.model.Bar;
 import com.example.debarembar.model.Product;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 
 public class CadastroBarActivity extends AppCompatActivity {
+    int n = 4;
 
     private ListView listViewProducts;
-    private ArrayList<Product> listProducts;
+    private ArrayList<Product> listProducts = new ArrayList<Product>();
     private ArrayAdapter<Product> arrayAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro_bar);
+        Banco bd = Banco.getInstance(getApplicationContext());
 
 
-        //listProducts.add();
-        listProducts = new ArrayList<Product>();
-        //Banco db = Banco.buildDatabase();
-        //listProducts.add(db.productDao().getAll());
 
-        listViewProducts= (ListView) findViewById(R.id.listView);
         arrayAdapter= new ArrayAdapter<Product> (this, android.R.layout.simple_list_item_1, listProducts);
+        Executor executor = Executors.newSingleThreadExecutor();
+        executor.execute(new Runnable() {
+            @Override
+            public void run() {
+                int[] a = criaVetor(n);
 
-        listViewProducts.setAdapter(arrayAdapter);
+                List<Product> minhaMae = bd.productDao().loadAllByIds(a);
+
+                listProducts.addAll(minhaMae);
+                listViewProducts= (ListView) findViewById(R.id.listView);
+                listViewProducts.setAdapter(arrayAdapter);
+                arrayAdapter.notifyDataSetChanged();
+            }
+        });
 
 
 
+    }
 
+    public int[] criaVetor(int n){
 
+        int  listaP[] = new int[n];
 
-
+        for (int i = 0; i <4; i++){
+            listaP[i] = i;
+        }
+        return listaP;
     }
 
 }

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.debarembar.R;
+import com.example.debarembar.controller.Central;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -41,7 +42,7 @@ public class UserProfile extends AppCompatActivity {
         btnOkMain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(UserProfile.this, MainActivity.class);
+                Intent intent = new Intent(UserProfile.this, Central.class);
                 startActivity(intent);
             }
         });

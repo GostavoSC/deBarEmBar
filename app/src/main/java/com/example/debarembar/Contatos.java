@@ -128,8 +128,8 @@ public class Contatos extends AppCompatActivity {
 
             cursor = getContentResolver ().query (uri, null, null,null,null);
             cursor.moveToFirst ();
-            cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
-            txtphoneNo.setText(cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME)));
+            String numero = cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
+            txtphoneNo.setText(numero);cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME);
 
 
         } catch (Exception e) {

@@ -60,4 +60,13 @@ public class Product {
     public void setPrice(float price) {
         this.price = price;
     }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "ID=" + ID +
+                ", name='" + name + '\'' +
+                ", price=" + price +
+                '}';
+    }
 }
