@@ -56,21 +56,19 @@ public class Contatos extends AppCompatActivity {
             // Should we show an explanation?
             if (ActivityCompat.shouldShowRequestPermissionRationale(this,
                     Manifest.permission.SEND_SMS)) {
-                // Show an explanation to the user *asynchronously* -- don't block
-                // this thread waiting for the user's response! After the user
-                // sees the explanation, try again to request the permission.
+
+                // Mostra uma explicação para o usuário * de forma assíncrona * - não bloqueie
+                // este thread aguarda a resposta do usuário! Após o usuário
+                // vê a explicação, tente novamente para solicitar a permissão.
             } else {
                 // No explanation needed; request the permission
                 ActivityCompat.requestPermissions(this,
                         new String[]{Manifest.permission.SEND_SMS},
                         MY_PERMISSIONS_REQUEST_READ_CONTACTS);
-
-                // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an
-                // app-defined int constant. The callback method gets the
-                // result of the request.
+                //O método de retorno de chamada obtém o resultado da solicitação.
             }
         } else {
-            // Permission has already been granted
+            //A permissão já foi concedida
         }
 
         sendBtn = (Button) findViewById(R.id.btnSendSMS);
@@ -99,20 +97,6 @@ public class Contatos extends AppCompatActivity {
             e.printStackTrace();
         }
     }
-    @Override
-    protected void onActivityResult (int requestCode, int resultCode,  Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK) {
-            switch (requestCode) {
-                case RESULT_PICK_CONTACT:
-
-                    contactPicked(data);
-                    break;
-            }
-        } else {
-            Toast.makeText(this, "Failed To pick contact", Toast.LENGTH_SHORT).show();
-        }
-    }
 
     private void contactPicked(Intent data) {
         Cursor cursor = null;
@@ -128,13 +112,28 @@ public class Contatos extends AppCompatActivity {
 
             cursor = getContentResolver ().query (uri, null, null,null,null);
             cursor.moveToFirst ();
-            cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
-            txtphoneNo.setText(cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME)));
+            String numero = cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
+            txtphoneNo.setText(numero);cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME);
 
 
         } catch (Exception e) {
             e.printStackTrace ();
         }
     }
+    @Override
+    protected void onActivityResult (int requestCode, int resultCode,  Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            switch (requestCode) {
+                case RESULT_PICK_CONTACT:
+
+                    contactPicked(data);
+                    break;
+            }
+        } else {
+            Toast.makeText(this, "Failed To pick contact", Toast.LENGTH_SHORT).show();
+        }
+    }
+
 
 }

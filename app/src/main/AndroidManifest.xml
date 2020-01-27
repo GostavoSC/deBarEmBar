@@ -37,7 +37,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".CadastroUsuario"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".controller.Central">
 
         </activity>
 
